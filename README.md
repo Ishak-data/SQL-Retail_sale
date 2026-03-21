@@ -1,7 +1,6 @@
 # 📊 Retail Sales Analysis  
 
-## 📌 Project Overview  
-**Level:** Beginner  
+## 📌 Project Overview   
 **Database:** `sql_project`  
 
 This project demonstrates SQL skills used to clean, explore, and analyze retail sales data. It includes database creation, data cleaning, exploratory analysis, and solving business problems using SQL queries.  
