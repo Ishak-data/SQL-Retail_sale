@@ -1,13 +1,15 @@
-# 📊 Retail Sales Analysis  
+## 📊 Retail Sales Analysis
 
-## 📌 Project Overview   
+## 📌 Project Overview
+
 **Database:** `sql_project`  
 
-This project demonstrates SQL skills used to clean, explore, and analyze retail sales data. It includes database creation, data cleaning, exploratory analysis, and solving business problems using SQL queries.  
+This project demonstrates SQL skills used to clean, explore, and analyze retail sales data. It includes database creation, data cleaning, exploratory analysis, and solving business problems using SQL queries.
 
 ---
 
-## 🎯 Objectives  
+## 🎯 Objectives
+
 - Create and manage a retail sales database  
 - Clean and prepare raw data  
 - Perform exploratory data analysis (EDA)  
@@ -16,13 +18,16 @@ This project demonstrates SQL skills used to clean, explore, and analyze retail 
 
 ---
 
-## 🏗️ Database Setup  
+## 🏗️ Database Setup
 
 ```sql
+-- Create Database
 CREATE DATABASE sql_project;
 
+-- Drop Table if Exists
 DROP TABLE IF EXISTS retail_sales;
 
+-- Create Table
 CREATE TABLE retail_sales (
     transactions_id INT PRIMARY KEY,
     sale_date DATE,
@@ -40,9 +45,10 @@ CREATE TABLE retail_sales (
 
 ---
 
-## 🧹 Data Cleaning  
+## 🧹 Data Cleaning
 
-### Find NULL values
+### 🔍 Identify Missing Values
+
 ```sql
 SELECT *
 FROM retail_sales
@@ -59,7 +65,8 @@ WHERE transactions_id IS NULL
    OR total_sale IS NULL;
 ```
 
-### Remove NULL values
+### 🗑️ Remove NULL Records
+
 ```sql
 DELETE FROM retail_sales
 WHERE transactions_id IS NULL
@@ -77,28 +84,43 @@ WHERE transactions_id IS NULL
 
 ---
 
-## 📊 Data Exploration  
+## 📊 Data Exploration
+
+### 📌 Total Transactions
 
 ```sql
-SELECT COUNT(*) AS total_rows FROM retail_sales;
+SELECT COUNT(*) AS total_rows 
+FROM retail_sales;
+```
 
-SELECT COUNT(DISTINCT customer_id) AS total_customers FROM retail_sales;
+### 📌 Unique Customers
 
-SELECT COUNT(DISTINCT category) AS total_categories FROM retail_sales;
+```sql
+SELECT COUNT(DISTINCT customer_id) AS total_customers 
+FROM retail_sales;
+```
+
+### 📌 Product Categories
+
+```sql
+SELECT COUNT(DISTINCT category) AS total_categories 
+FROM retail_sales;
 ```
 
 ---
 
-## 📈 Data Analysis  
+## 📈 Data Analysis
 
-### 1. Sales on specific date
+### 1️⃣ Sales on Specific Date
+
 ```sql
 SELECT *
 FROM retail_sales
 WHERE sale_date = '2022-11-05';
 ```
 
-### 2. Clothing sales > 10 units in Nov 2022
+### 2️⃣ High Quantity Clothing Sales (Nov 2022)
+
 ```sql
 SELECT *
 FROM retail_sales
@@ -108,7 +130,8 @@ WHERE category = 'Clothing'
   AND sale_date < '2022-12-01';
 ```
 
-### 3. Total sales by category
+### 3️⃣ Total Revenue by Category
+
 ```sql
 SELECT category,
        SUM(total_sale) AS total_sales
@@ -117,21 +140,24 @@ GROUP BY category
 ORDER BY total_sales DESC;
 ```
 
-### 4. Average age (Beauty category)
+### 4️⃣ Average Age (Beauty Category)
+
 ```sql
 SELECT ROUND(AVG(age), 2) AS avg_age
 FROM retail_sales
 WHERE category = 'Beauty';
 ```
 
-### 5. Transactions with sales > 1000
+### 5️⃣ Transactions Above 1000
+
 ```sql
 SELECT *
 FROM retail_sales
 WHERE total_sale > 1000;
 ```
 
-### 6. Transactions by gender and category
+### 6️⃣ Transactions by Gender & Category
+
 ```sql
 SELECT category,
        gender,
@@ -141,7 +167,8 @@ GROUP BY category, gender
 ORDER BY category;
 ```
 
-### 7. Best selling month each year
+### 7️⃣ Best Sales Month Each Year
+
 ```sql
 SELECT month, year, avg_sale
 FROM (
@@ -158,7 +185,8 @@ FROM (
 WHERE rank = 1;
 ```
 
-### 8. Top 5 customers
+### 8️⃣ Top 5 Customers
+
 ```sql
 SELECT customer_id,
        SUM(total_sale) AS total_sales
@@ -168,15 +196,18 @@ ORDER BY total_sales DESC
 LIMIT 5;
 ```
 
-### 9. Unique customers per category
+### 9️⃣ Customer Reach by Category
+
 ```sql
 SELECT category,
        COUNT(DISTINCT customer_id) AS unique_customers
 FROM retail_sales
-GROUP BY category;
+GROUP BY category
+ORDER BY unique_customers DESC;
 ```
 
-### 10. Orders by shift
+### 🔟 Sales by Time Shift
+
 ```sql
 WITH hourly_sales AS (
     SELECT *,
@@ -196,19 +227,22 @@ GROUP BY shift;
 
 ---
 
-## 📌 Key Insights  
-- Sales vary significantly across categories  
-- High-value customers contribute major revenue  
+## 📌 Key Insights
+
+- Sales vary significantly across product categories  
+- High-value customers contribute a major portion of revenue  
 - Sales patterns change based on time of day  
-- Monthly trends help identify peak performance  
+- Monthly trends help identify peak performance periods  
 
 ---
 
-## 🛠️ Tools Used  
+## 🛠️ Tools Used
+
 - PostgreSQL  
 - SQL (Aggregation, Window Functions, CTEs)  
 
 ---
 
-## 🚀 Conclusion  
-This project demonstrates core SQL skills including data cleaning, analysis, and extracting business insights from structured data.  
+## 🚀 Conclusion
+
+This project demonstrates core SQL skills including data cleaning, data exploration, and extracting meaningful business insights from structured retail sales data.
